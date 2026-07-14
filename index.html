@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ha">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>QualiFood AI — Inspection & Food Safety</title>
+<meta name="theme-color" content="#131A20">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="favicon.ico">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- SPLASH -->
+  <section id="screen-splash" class="screen active">
+    <div class="logo-mark">QF</div>
+    <h1>QualiFood AI</h1>
+    <p class="tagline">Field Inspection &middot; HACCP &middot; Lab Intelligence</p>
+  </section>
+
+  <!-- LOGIN -->
+  <section id="screen-login" class="screen">
+    <h1>Shiga</h1>
+    <p class="sub">Shiga don fara duba abinci da rahotanni.</p>
+    <form id="login-form">
+      <div class="field">
+        <label for="email">Imel</label>
+        <input type="email" id="email" required>
+      </div>
+      <div class="field">
+        <label for="password">Kalmar Sirri</label>
+        <input type="password" id="password" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Shiga</button>
+    </form>
+    <p class="sub">Ba ka da account? <a href="#" id="link-to-register">Yi rajista</a></p>
+  </section>
+
+  <!-- REGISTER -->
+  <section id="screen-register" class="screen">
+    <h1>Yi Rajista</h1>
+    <p class="sub">Ƙirƙiri sabon account domin fara amfani da QualiFood AI.</p>
+    <form id="register-form">
+      <div class="field">
+        <label for="reg-email">Imel</label>
+        <input type="email" id="reg-email" required>
+      </div>
+      <div class="field">
+        <label for="reg-password">Kalmar Sirri</label>
+        <input type="password" id="reg-password" minlength="8" required>
+      </div>
+      <div class="field">
+        <label for="reg-role">Matsayi</label>
+        <select id="reg-role">
+          <option value="inspector">Inspector</option>
+          <option value="admin">Admin</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Yi Rajista</button>
+    </form>
+    <p class="sub">Ka riga ka yi rajista? <a href="#" id="link-to-login">Shiga</a></p>
+  </section>
+
+  <!-- DASHBOARD -->
+  <section id="screen-dashboard" class="screen">
+    <header class="app-bar"><h1>Dashboard</h1></header>
+    <div class="stat-grid">
+      <div class="card stat-card"><span class="value" id="stat-inspections">0</span><span class="label">Dubawa</span></div>
+      <div class="card stat-card"><span class="value" id="stat-open-risks">0</span><span class="label">Haɗari a buɗe</span></div>
+      <div class="card stat-card"><span class="value" id="stat-samples">0</span><span class="label">Samfura</span></div>
+      <div class="card stat-card"><span class="value" id="stat-compliance">—</span><span class="label">Bin Ka'ida</span></div>
+    </div>
+    <h2 class="section-title">Dubawa na Baya-bayan Nan</h2>
+    <div class="inspection-list" id="recent-inspections"></div>
+    <button class="fab" id="fab-new-inspection" aria-label="Sabon dubawa">+</button>
+  </section>
+
+  <!-- INSPECTION -->
+  <section id="screen-inspection" class="screen screen-inspection">
+    <header class="app-bar"><h1>Sabon Dubawa</h1></header>
+    <div id="inspection-form"></div>
+  </section>
+
+  <!-- AI / RAG -->
+  <section id="screen-ai" class="screen screen-ai">
+    <header class="app-bar"><h1>Mataimaki na AI</h1></header>
+    <div id="ai-chat"></div>
+    <form id="ai-form" class="ai-input-row">
+      <input type="text" id="ai-input" placeholder="Yi tambaya game da tsaron abinci…" required>
+      <button type="submit" class="btn btn-primary">Aika</button>
+    </form>
+  </section>
+
+  <!-- ANALYTICS -->
+  <section id="screen-analytics" class="screen screen-analytics">
+    <header class="app-bar"><h1>Ƙididdiga</h1></header>
+    <canvas id="risk-trend-chart"></canvas>
+    <p class="meta" id="analytics-source"></p>
+  </section>
+
+  <!-- LABORATORY -->
+  <section id="screen-laboratory" class="screen screen-laboratory">
+    <header class="app-bar"><h1>Dakin Gwaje-gwaje</h1></header>
+    <div id="lab-samples-list"></div>
+  </section>
+
+  <!-- INVENTORY -->
+  <section id="screen-inventory" class="screen screen-inventory">
+    <header class="app-bar"><h1>Ma'aji</h1></header>
+    <div id="inventory-list"></div>
+  </section>
+
+  <!-- REPORTS -->
+  <section id="screen-reports" class="screen screen-reports">
+    <header class="app-bar"><h1>Rahotanni</h1></header>
+    <div id="reports-list"></div>
+  </section>
+
+  <!-- PROFILE -->
+  <section id="screen-profile" class="screen screen-profile">
+    <header class="app-bar"><h1>Bayanan Ma'aikaci</h1></header>
+    <div id="profile-content"></div>
+  </section>
+
+  <!-- SETTINGS -->
+  <section id="screen-settings" class="screen screen-settings">
+    <header class="app-bar"><h1>Saituna</h1></header>
+    <div id="settings-content"></div>
+  </section>
+
+  <!-- BOTTOM NAV -->
+  <nav class="bottom-nav" id="bottom-nav" hidden>
+    <a class="nav-item active" data-route="dashboard">🏠<span>Gida</span></a>
+    <a class="nav-item" data-route="inspection">📋<span>Dubawa</span></a>
+    <a class="nav-item" data-route="ai">🤖<span>AI</span></a>
+    <a class="nav-item" data-route="analytics">📊<span>Bayanai</span></a>
+    <a class="nav-item" data-route="profile">👤<span>Ni</span></a>
+  </nav>
+
+</div>
+
+<script src="js/utils.js"></script>
+<script src="js/api.js"></script>
+<script src="js/database.js"></script>
+<script src="js/offline.js"></script>
+<script src="js/language.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/splash.js"></script>
+<script src="js/dashboard.js"></script>
+<script src="js/haccp.js"></script>
+<script src="js/risk-calculator.js"></script>
+<script src="js/inspection.js"></script>
+<script src="js/camera.js"></script>
+<script src="js/barcode.js"></script>
+<script src="js/voice.js"></script>
+<script src="js/gps.js"></script>
+<script src="js/rag.js"></script>
+<script src="js/ai.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/analytics.js"></script>
+<script src="js/laboratory.js"></script>
+<script src="js/inventory.js"></script>
+<script src="js/supplier.js"></script>
+<script src="js/recall.js"></script>
+<script src="js/reports.js"></script>
+<script src="js/notifications.js"></script>
+<script src="js/profile.js"></script>
+<script src="js/settings.js"></script>
+<script src="js/pwa.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
