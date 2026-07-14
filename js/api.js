@@ -43,31 +43,5 @@ const Api = {
 
     return data;
   },
-
-  /**
-   * Fetch a binary file (e.g. a generated PDF) with the auth header attached,
-   * then trigger a browser download. Needed because <a href> / window.open()
-   * cannot send an Authorization header, and this endpoint is auth-protected.
-   */
-  async download(path, filename) {
-    const session = Auth.getSession();
-    const headers = {};
-    if (session && session.token) headers['Authorization'] = `Bearer ${session.token}`;
-
-    const res = await fetch(`${this.BASE_URL}${path}`, { headers });
-    if (!res.ok) {
-      if (res.status === 401) Auth.logout();
-      throw new Error(`Download failed (${res.status})`);
-    }
-    const blob = await res.blob();
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename || 'report.pdf';
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    URL.revokeObjectURL(url);
-  },
 };
 window.Api = Api;
