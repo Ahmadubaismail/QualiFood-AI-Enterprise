@@ -1,0 +1,11 @@
+Flask==3.0.3
+flask-cors==5.0.0
+gunicorn==22.0.0
+python-dotenv==1.0.1
+PyJWT==2.9.0
+reportlab==4.2.5
+anthropic==0.34.0
+# Add when wiring the real LLM call in rag_engine.py:
+# anthropic==0.34.0
+# Add when moving off the TF-IDF-style retriever to real embeddings:
+# sentence-transformers==3.0.1
