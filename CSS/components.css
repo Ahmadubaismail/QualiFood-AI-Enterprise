@@ -1,0 +1,76 @@
+/* ==== Buttons ==== */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-5);
+  border-radius: var(--radius-md);
+  font-weight: 600; font-size: var(--fs-sm);
+  transition: transform var(--dur-fast) var(--ease-standard), background var(--dur-fast) var(--ease-standard);
+}
+.btn-primary { background: var(--color-accent); color: #fff; }
+.btn-primary:hover { transform: translateY(-1px); }
+.btn-primary:active { transform: translateY(0); }
+.btn-ghost { background: transparent; border: var(--border-hairline); color: var(--color-ink); }
+.btn-danger { background: var(--color-danger); color: #fff; }
+
+/* ==== Cards ==== */
+.card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  border: var(--border-hairline);
+  box-shadow: var(--shadow-card);
+  padding: var(--sp-5);
+}
+
+/* ==== Risk badges (HACCP signal system) ==== */
+.badge { display: inline-flex; align-items: center; gap: var(--sp-1);
+  font-family: var(--font-mono); font-size: var(--fs-xs); text-transform: uppercase;
+  letter-spacing: 0.04em; padding: var(--sp-1) var(--sp-2); border-radius: var(--radius-sm); }
+.badge-safe    { background: rgba(46,125,91,0.12);  color: var(--color-safe); }
+.badge-caution { background: rgba(198,138,30,0.14); color: var(--color-caution); }
+.badge-danger  { background: rgba(178,58,46,0.14);  color: var(--color-danger); }
+
+/* ==== Bottom nav (mobile-first PWA shell) ==== */
+.bottom-nav {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  display: flex; justify-content: space-around;
+  background: var(--color-slate-900);
+  padding: var(--sp-3) 0 env(safe-area-inset-bottom);
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.bottom-nav .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px;
+  color: var(--color-slate-400); font-size: var(--fs-xs); }
+.bottom-nav .nav-item.active { color: var(--color-accent); }
+
+/* ==== Top app bar ==== */
+.app-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: var(--sp-4) var(--sp-5);
+  border-bottom: var(--border-hairline);
+}
+.app-bar h1 { font-family: var(--font-display); font-size: var(--fs-lg); }
+
+/* ==== Screens ==== */
+.screen { display: none; min-height: 100vh; padding-bottom: 88px; }
+.screen.active { display: block; }
+
+/* ==== Toasts ==== */
+#toast-container {
+  position: fixed; left: 0; right: 0; bottom: calc(88px + var(--sp-4));
+  display: flex; flex-direction: column; align-items: center; gap: var(--sp-2);
+  pointer-events: none; z-index: 999;
+}
+.toast {
+  max-width: 90%;
+  padding: var(--sp-3) var(--sp-5);
+  border-radius: var(--radius-md);
+  font-size: var(--fs-sm);
+  color: #fff;
+  background: var(--color-slate-800);
+  box-shadow: var(--shadow-modal);
+  opacity: 0; transform: translateY(8px);
+  transition: opacity var(--dur-med) var(--ease-standard), transform var(--dur-med) var(--ease-standard);
+}
+.toast-visible { opacity: 1; transform: translateY(0); }
+.toast-danger  { background: var(--color-danger); }
+.toast-success { background: var(--color-safe); }
+.toast-info    { background: var(--color-info); }
